@@ -1,0 +1,13 @@
+---
+- name: Install dependent repositories
+  get_url:
+    url=https://bintray.com/sbt/rpm/rpm
+    dest=/etc/yum.repos.d/bintray-sbt-rpm.repo
+    mode=0644
+
+- name: Install dependent libraries
+  yum: name={{ item }} state=present
+  with_items:
+    - java7
+    - http://downloads.typesafe.com/scala/2.11.4/scala-2.11.4.rpm
+    - sbt
